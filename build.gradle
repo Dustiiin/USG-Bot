@@ -1,0 +1,25 @@
+plugins {
+    id'application'
+    id'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+mainClassName = "de.dustiiin.Main"
+
+group 'de.dustiiin'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://m2.dv8tion.net/releases"
+    }
+}
+
+dependencies {
+    implementation("net.dv8tion:JDA:5.0.0-alpha.12")
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+}
+
+compileJava.options.encoding = 'UTF-8'
