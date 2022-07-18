@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,44 +23,119 @@ import static de.dustiiin.Config.*;
 
 public class TicketInteraction extends ListenerAdapter {
 
-    public void onSelectMenuInteraction(SelectMenuInteractionEvent event) {
-        String categoryid = "";
-        String name = "";
 
-
-
-        if (event.getSelectMenu().getId().equals("ticketmenu")) {
-            if (event.getInteraction().getId().equals("carrer")) {
-                categoryid = carrerid;
-                name = "Karriere";
-            }
-
-
-
-
-            Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(categoryid);
-            TextChannel channel = event.getGuild().createTextChannel(name + "-" + Objects.requireNonNull(event.getMember()).getUser().getName(), category).complete();
-
+    public void onSelectMenuInteraction(@NotNull SelectMenuInteractionEvent event) {
+        if (event.getComponentId().equals("ticketmenu")) {
             EmbedBuilder builder = new EmbedBuilder();
-            builder.setColor(Color.HSBtoRGB(48, 68, 60));
-            builder.setDescription("Es wird sich in kürze um dich gekümmert\n"
-                                 + "Reagiere mit \uD83D\uDD12 + und das Ticket wird geschlossen");
+            builder.setColor(Color.yellow);
+            builder.setDescription("Es wird sich in kürze um dich gekümmert");
 
-            Message message = channel.sendMessageEmbeds(builder.build())
-                    .setActionRow(sendButtons())
-                    .complete();
+            if ("carrer".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(carrerid);
+                TextChannel channel = event.getGuild().createTextChannel("Karrier-" + event.getMember().getUser().getName(), category).complete();
 
-            Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
 
-            String jumpURL = message.getJumpUrl();
-            event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
-            channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
-            ping.delete().queue();
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            } else if ("adopt".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(adoptid);
+                TextChannel channel = event.getGuild().createTextChannel("Adoption-" + event.getMember().getUser().getName(), category).complete();
+
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
+
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            } else if ("marry".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(marryid);
+                TextChannel channel = event.getGuild().createTextChannel("Eheschließung-" + event.getMember().getUser().getName(), category).complete();
+
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
+
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            } else if ("business".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(businessid);
+                TextChannel channel = event.getGuild().createTextChannel("Gewerbe-" + event.getMember().getUser().getName(), category).complete();
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
+
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            } else if ("question".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(questionid);
+                TextChannel channel = event.getGuild().createTextChannel("Frage-" + event.getMember().getUser().getName(), category).complete();
+
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
+
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            } else if ("livestock".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(livestockid);
+                TextChannel channel = event.getGuild().createTextChannel("Tierhaltungslizenz-" + event.getMember().getUser().getName(), category).complete();
+
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
+
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            } else if ("complaint".equals(event.getValues().get(0))) {
+                Category category = Objects.requireNonNull(event.getGuild()).getCategoryById(complaintid);
+                TextChannel channel = event.getGuild().createTextChannel("Strafanzeige-" + event.getMember().getUser().getName()).complete();
+
+                Message message = channel.sendMessageEmbeds(builder.build())
+                        .setActionRow(sendButtons()).complete();
+
+                Message ping = channel.sendMessage(event.getMember().getUser().getAsMention()).complete();
+
+                String jumpURL = message.getJumpUrl();
+                event.reply("Deine Ticket wurde erstellt\n" + "[" + channel.getName() +"](" + jumpURL + ")").setEphemeral(true).queue();
+                channel.upsertPermissionOverride(event.getMember()).grant(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
+                ping.delete().queue();
+
+            }
         }
     }
 
+
+
+
     public void onButtonInteraction(ButtonInteractionEvent event) {
-        Member user = event.getMember();
+
 
         if (event.getButton().getId().equals("closeticket")) {
             event.reply("Dieses Ticket wird geschlossen").queue();

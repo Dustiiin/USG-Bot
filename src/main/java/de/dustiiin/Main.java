@@ -1,6 +1,7 @@
 package de.dustiiin;
 
 import de.dustiiin.ticketing.TicketInteraction;
+import de.dustiiin.welcome.Welcome;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -21,6 +22,7 @@ public class Main {
                 .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .enableIntents(GatewayIntent.GUILD_EMOJIS)
                 .addEventListeners(new TicketInteraction())
+                .addEventListeners(new Welcome())
                 .build().awaitReady();
 
 
