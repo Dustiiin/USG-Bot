@@ -2,7 +2,7 @@ package de.dustiiin;
 
 public class Config {
 
-    public static String token = "OTk4MDI5MjUxNjIwMTE0NTIz.GodH5t.O_a845HklQ2iAQ7xjOTr6PgteU7d-BOok7AH6k";
+    public static String token = "";
 
 
     //TICKETSYSTEM CONFIG
